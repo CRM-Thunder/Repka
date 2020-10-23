@@ -13,12 +13,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottomNavigation;
 Fragment activities=new Activities();
+Fragment home=new BlankFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                activities).commit();
+                home).commit();
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -29,9 +30,11 @@ Fragment activities=new Activities();
                        // currentFragment=new Activities();
                         openFragment(activities);
                         return true;
+                    case R.id.navigation_home:
+                        openFragment(home);
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                        currentFragment).commit();
+               // getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                //        currentFragment).commit();
                 return false;
 
             }
