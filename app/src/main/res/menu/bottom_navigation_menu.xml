@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Home"
+    <item android:title="@string/home"
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         tools:ignore="ExtraText">
@@ -15,4 +15,11 @@
     tools:ignore="ExtraText">
 
 </item>
+    <item android:title="@string/challenges"
+
+        android:id="@+id/navigation_challenges"
+        android:icon="@drawable/ic_directions_run_black_24dp"
+        tools:ignore="ExtraText">
+
+    </item>
 </menu>

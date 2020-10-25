@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottomNavigation;
 Fragment activities=new Activities();
 Fragment home=new BlankFragment();
+Fragment challenges=new ChallengesFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +30,21 @@ Fragment home=new BlankFragment();
                 Fragment currentFragment=null;
                 switch(item.getItemId()){
                     case R.id.navigation_activities:
-                       // currentFragment=new Activities();
-                        openFragment(activities);
+                        currentFragment=activities;
+                        openFragment(currentFragment);
                         return true;
                     case R.id.navigation_home:
-                        openFragment(home);
+                        currentFragment=home;
+                        openFragment(currentFragment);
+                        return true;
+                    case R.id.navigation_challenges:
+                        currentFragment=challenges;
+                        openFragment(currentFragment);
+                        return true;
                 }
-               // getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                //        currentFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                        currentFragment).commit();
+
                 return false;
 
             }

@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Activities#newInstance} factory method to
+ * Use the {@link ChallengesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Activities extends Fragment {
-   private int g=0;
+public class ChallengesFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,14 +24,21 @@ public class Activities extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Activities() {
+    public ChallengesFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ChallengesFragment.
+     */
     // TODO: Rename and change types and number of parameters
-    public static Activities newInstance(String param1, String param2) {
-        Activities fragment = new Activities();
+    public static ChallengesFragment newInstance(String param1, String param2) {
+        ChallengesFragment fragment = new ChallengesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,21 +53,13 @@ public class Activities extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        System.out.println("Przed"+g);
-        g+=10;
-        System.out.println("Po"+g);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        System.out.println("Przed"+g);
-        g+=10;
-        System.out.println("Po"+g);
-        View view=inflater.inflate(R.layout.fragment_activities, container, false);
-        return view;
-
+       View view=inflater.inflate(R.layout.fragment_challenges, container, false);
+       return view;
     }
 }
