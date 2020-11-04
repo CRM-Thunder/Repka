@@ -4,6 +4,7 @@
     <item android:title="@string/home"
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+
         tools:ignore="ExtraText">
 
 
@@ -19,6 +20,13 @@
 
         android:id="@+id/navigation_challenges"
         android:icon="@drawable/ic_directions_run_black_24dp"
+        tools:ignore="ExtraText">
+
+    </item>
+    <item android:title="@string/settings"
+
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
         tools:ignore="ExtraText">
 
     </item>

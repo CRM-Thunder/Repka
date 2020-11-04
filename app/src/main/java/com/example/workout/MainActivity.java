@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,8 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottomNavigation;
 Fragment activities=new Activities();
-Fragment home=new BlankFragment();
+Fragment home=new HomeFragment();
 Fragment challenges=new ChallengesFragment();
+Fragment settings=new SettingsFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,10 @@ Fragment challenges=new ChallengesFragment();
                         return true;
                     case R.id.navigation_challenges:
                         currentFragment=challenges;
+                        openFragment(currentFragment);
+                        return true;
+                    case  R.id.navigation_settings:
+                        currentFragment=settings;
                         openFragment(currentFragment);
                         return true;
                 }
