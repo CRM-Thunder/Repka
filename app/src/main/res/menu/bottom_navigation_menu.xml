@@ -9,7 +9,7 @@
 
 
     </item>
-<item android:title="@string/activities"
+<item android:title="@string/activity"
 
     android:id="@+id/navigation_activities"
     android:icon="@drawable/ic_fitness_center_black_24dp"
