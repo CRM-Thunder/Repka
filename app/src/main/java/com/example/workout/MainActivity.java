@@ -18,6 +18,7 @@ Fragment activities=new ActivitiesFragment();
 Fragment home=new HomeFragment();
 Fragment challenges=new ChallengesFragment();
 Fragment settings=new SettingsFragment();
+Fragment activityStarted=new ActivityStartedFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,13 @@ Fragment settings=new SettingsFragment();
                 Fragment currentFragment=null;
                 switch(item.getItemId()){
                     case R.id.navigation_activities:
-                        currentFragment=activities;
+                        boolean isS=ActivitiesFragment.isRunStarted();
+                        if(!isS) {
+                            currentFragment = activities;
+                        }
+                        else if(isS){
+                            currentFragment=activityStarted;
+                        }
                         openFragment(currentFragment);
                         return true;
                     case R.id.navigation_home:
@@ -54,11 +61,6 @@ Fragment settings=new SettingsFragment();
 
             }
         });
-
-
-
-
-
     }
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

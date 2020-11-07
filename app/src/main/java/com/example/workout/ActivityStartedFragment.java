@@ -2,23 +2,19 @@ package com.example.workout;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
+ * Use the {@link ActivityStartedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends Fragment {
-    Switch switch2;
-    int c=0;
-    boolean dark_mode=false;
+public class ActivityStartedFragment extends Fragment {
+int g=0;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +24,7 @@ public class SettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SettingsFragment() {
+    public ActivityStartedFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +34,11 @@ public class SettingsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
+     * @return A new instance of fragment ActivityStartedFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
+    public static ActivityStartedFragment newInstance(String param1, String param2) {
+        ActivityStartedFragment fragment = new ActivityStartedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,41 +53,16 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("g przed"+g);
         // Inflate the layout for this fragment
-        System.out.println("Przed h"+c);
-        c+=10;
-
-        View view=inflater.inflate(R.layout.fragment_settings, container, false);
-       /* switch2=view.findViewById(R.id.switch2);
-        switch2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(dark_mode==false) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    System.out.println("WORKS");
-                    switch2.setChecked(true);
-
-                    dark_mode=true;
-                }else if(dark_mode){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    dark_mode=false;
-                    switch2.setChecked(false);
-                }
-            }
-        });
-    */
-        System.out.println("Po h"+c);
-
-
+        View view=inflater.inflate(R.layout.fragment_activity_started, container, false);
+        g=g+5;
+        System.out.println("g po"+g);
         return view;
     }
-
 }

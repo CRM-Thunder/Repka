@@ -1,5 +1,6 @@
 package com.example.workout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -17,7 +18,13 @@ import com.google.android.gms.maps.MapView;
  * create an instance of this fragment.
  */
 public class ActivitiesFragment extends Fragment {
-    public boolean runStarted=false;
+    private static boolean runStarted=false;
+
+
+    public static boolean isRunStarted() {
+        return runStarted;
+    }
+
     Button startButton;
     TextView timeTxtView, startNewRunTxtView, velocityTxtView, distanceTxtView, kcalTxtView;
     MapView map;
@@ -60,9 +67,8 @@ public class ActivitiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = null;
-        if(!runStarted) {
-             view = inflater.inflate(R.layout.fragment_activities, container, false);
+        View view = inflater.inflate(R.layout.fragment_activities, container, false);
+
             startButton = view.findViewById(R.id.buttonStart);
             timeTxtView=view.findViewById(R.id.timeTxtViewSt);
             startNewRunTxtView=view.findViewById(R.id.startNewRunTxtViewSt);
@@ -72,20 +78,10 @@ public class ActivitiesFragment extends Fragment {
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChallengesFragment()).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new ActivityStartedFragment()).addToBackStack(null).commit();
+                    runStarted=true;
                 }
             });
-
-
-
-
-
-
-
-        }
-
-        return view;
+            return view;
     }
 }
