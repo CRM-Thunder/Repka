@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 BottomNavigationView bottomNavigation;
-Fragment activities=new Activities();
+Fragment activities=new ActivitiesFragment();
 Fragment home=new HomeFragment();
 Fragment challenges=new ChallengesFragment();
 Fragment settings=new SettingsFragment();

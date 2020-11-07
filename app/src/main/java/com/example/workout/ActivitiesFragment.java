@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Activities#newInstance} factory method to
+ * Use the {@link ActivitiesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Activities extends Fragment {
+public class ActivitiesFragment extends Fragment {
    private int g=0;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -25,14 +25,14 @@ public class Activities extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Activities() {
+    public ActivitiesFragment() {
         // Required empty public constructor
     }
 
 
     // TODO: Rename and change types and number of parameters
-    public static Activities newInstance(String param1, String param2) {
-        Activities fragment = new Activities();
+    public static ActivitiesFragment newInstance(String param1, String param2) {
+        ActivitiesFragment fragment = new ActivitiesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
