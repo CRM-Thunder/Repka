@@ -18,7 +18,6 @@ Fragment activities=new ActivitiesFragment();
 Fragment home=new HomeFragment();
 Fragment challenges=new ChallengesFragment();
 Fragment settings=new SettingsFragment();
-Fragment activityStarted=new ActivityStartedFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +31,7 @@ Fragment activityStarted=new ActivityStartedFragment();
                 Fragment currentFragment=null;
                 switch(item.getItemId()){
                     case R.id.navigation_activities:
-                        boolean isS=ActivitiesFragment.isRunStarted();
-                        if(!isS) {
                             currentFragment = activities;
-                        }
-                        else if(isS){
-                            currentFragment=activityStarted;
-                        }
                         openFragment(currentFragment);
                         return true;
                     case R.id.navigation_home:

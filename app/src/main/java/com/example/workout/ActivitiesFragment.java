@@ -21,9 +21,7 @@ public class ActivitiesFragment extends Fragment {
     private static boolean runStarted=false;
 
 
-    public static boolean isRunStarted() {
-        return runStarted;
-    }
+
 
     Button startButton;
     TextView timeTxtView, startNewRunTxtView, velocityTxtView, distanceTxtView, kcalTxtView;
@@ -78,8 +76,8 @@ public class ActivitiesFragment extends Fragment {
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new ActivityStartedFragment()).addToBackStack(null).commit();
-                    runStarted=true;
+
+
                 }
             });
             return view;
