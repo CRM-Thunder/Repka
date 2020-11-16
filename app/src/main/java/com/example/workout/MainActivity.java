@@ -1,0 +1,85 @@
+package com.example.workout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.os.Handler;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import static com.example.workout.ActivitiesFragment.isRunStarted;
+
+
+public class MainActivity extends AppCompatActivity {
+BottomNavigationView bottomNavigation;
+Fragment activities=new ActivitiesFragment();
+Fragment home=new HomeFragment();
+Fragment challenges=new ChallengesFragment();
+Fragment settings=new SettingsFragment();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                home).commit();
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment currentFragment=null;
+                switch(item.getItemId()){
+                    case R.id.navigation_activities:
+                        if(isRunStarted()){
+                            bottomNavigation.getMenu().removeItem(R.id.bottom_navigation);
+                        }else{
+                            showBottomNavigationView(bottomNavigation);
+                        }
+                        currentFragment = activities;
+                        openFragment(currentFragment);
+                        return true;
+                    case R.id.navigation_home:
+                        currentFragment=home;
+                        openFragment(currentFragment);
+                        return true;
+                    case R.id.navigation_challenges:
+                        currentFragment=challenges;
+                        openFragment(currentFragment);
+                        return true;
+                    case  R.id.navigation_settings:
+                        currentFragment=settings;
+                        openFragment(currentFragment);
+                        return true;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                        currentFragment).commit();
+
+                return false;
+
+            }
+        });
+    }
+    public void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void hideBottomNavigationView(BottomNavigationView view) {
+        view.clearAnimation();
+        view.animate().translationY(view.getHeight()).setDuration(300);
+    }
+
+    public void showBottomNavigationView(BottomNavigationView view) {
+        view.clearAnimation();
+        view.animate().translationY(0).setDuration(300);
+    }
+
+
+
+
+}
