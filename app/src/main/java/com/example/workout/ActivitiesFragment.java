@@ -21,6 +21,11 @@ import com.google.android.gms.maps.MapView;
  */
 public class ActivitiesFragment extends Fragment {
     private static boolean runStarted;
+    private static boolean activeRun;
+
+    public static boolean isActiveRun() {
+        return activeRun;
+    }
 
     public static void setRunStarted(boolean runStarted) {
         ActivitiesFragment.runStarted = runStarted;
@@ -97,6 +102,7 @@ public class ActivitiesFragment extends Fragment {
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
                     runStarted = true;
+                    activeRun=true;
                 }
 
             }
@@ -115,6 +121,7 @@ public class ActivitiesFragment extends Fragment {
                     chronometer.stop();
                     pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
                     runStarted = false;
+                    activeRun=true;
                 }
 
             }
@@ -128,6 +135,7 @@ public class ActivitiesFragment extends Fragment {
                 runStarted = false;
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 pauseOffset = 0;
+                activeRun=false;
             }
         });
         chronometer.setBase(SystemClock.elapsedRealtime());
