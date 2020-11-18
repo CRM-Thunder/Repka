@@ -91,13 +91,7 @@ public class ActivitiesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!runStarted) {
-                    /*if (ChronometerHelper.getmStartTime() == null) {
-                        long mStartTime = SystemClock.elapsedRealtime();
-                        ChronometerHelper.setmStartTime(mStartTime);
-                        chronometer.setBase(mStartTime - pauseOffset);
-                    } else {
-                        chronometer.setBase(ChronometerHelper.getmStartTime());
-                    }*/
+
 
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
@@ -114,10 +108,7 @@ public class ActivitiesFragment extends Fragment {
             public void onClick(View v) {
 
                 if(runStarted){
-                    /*long mStartTime = SystemClock.elapsedRealtime();
-                    ChronometerHelper.setmStartTime(mStartTime);
-                    chronometer.setBase(mStartTime);
-                    chronometer.stop();*/
+
                     chronometer.stop();
                     pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
                     runStarted = false;
