@@ -11,6 +11,9 @@
     <string name="register">Register</string>
     <string name="login_or_register">Login or register</string>
     <string name="not_logged">You are not logged in.</string>
+    <string name="start">START</string>
+    <string name="pause">PAUSE</string>
+    <string name="reset">RESET</string>
     <string-array name="language">
         <item>English</item>
         <item>Polish</item>

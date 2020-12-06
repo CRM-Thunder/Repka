@@ -22,19 +22,10 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.117" />
+            app:layout_constraintVertical_bias="0.117" /><![CDATA[
 
-        <Spinner
-            android:id="@+id/spinner_lang"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="540dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
         />
+    ]]>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

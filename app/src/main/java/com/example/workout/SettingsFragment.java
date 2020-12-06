@@ -17,28 +17,12 @@ import android.widget.Switch;
  * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SettingsFragment extends Fragment {
     Switch switch2;
     int c=0;
     boolean dark_mode=false;
-    public static String language;
-    public static boolean changeLang;
 
-    public static boolean isChangeLang() {
-        return changeLang;
-    }
 
-    public static void setChangeLang(boolean changeLang) {
-        SettingsFragment.changeLang = changeLang;
-    }
-
-    public static String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     Spinner spinner;
     // TODO: Rename parameter arguments, choose names that match
@@ -111,34 +95,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         });
     */
 
-        spinner=view.findViewById(R.id.spinner_lang);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getContext(),R.array.language,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
 
 
 
 
 
         return view;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        parent.getItemAtPosition(position);
-        System.out.println( parent.getItemAtPosition(position));
-        if(parent.getItemAtPosition(position)=="English" ||parent.getItemAtPosition(position)=="Angielski"){
-            setChangeLang(true);
-            setLanguage("en");
-
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        setChangeLang(false);
     }
 
 

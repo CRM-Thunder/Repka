@@ -17,8 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.example.workout.ActivitiesFragment.isActiveRun;
 import static com.example.workout.ActivitiesFragment.isRunStarted;
-import static com.example.workout.SettingsFragment.getLanguage;
-import static com.example.workout.SettingsFragment.isChangeLang;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
@@ -100,25 +98,4 @@ public class MainActivity extends AppCompatActivity {
         view.animate().translationY(0).setDuration(300);
     }
 
-    /*public void setLang(String s) {
-        setAppLocale(s);
-    }
-
-    private void setAppLocale(String s) {
-        Locale locale = new Locale(s);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My_lang", s);
-        editor.apply();
-    }
-    public void LoadLocale(){
-        SharedPreferences prefs=getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language=prefs.getString("My_lang","pl");
-        setAppLocale(language);
-    }
-
-     */
 }
