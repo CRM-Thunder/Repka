@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.example.workout.ActivitiesFragment.isActiveRun;
 import static com.example.workout.ActivitiesFragment.isRunStarted;
+import static com.example.workout.LoginFragment.isIsLoggedIn;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment home = new HomeFragment();
     Fragment challenges = new ChallengesFragment();
     Fragment settings = new SettingsFragment();
+    Fragment loggedIn = new LoggedFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
                             openFragment(currentFragment);
                             return true;
                         case R.id.navigation_home:
-                            currentFragment = home;
+                            if(!isIsLoggedIn()) {
+                                currentFragment = home;
+                            }else{
+                            currentFragment = loggedIn;
+                            }
                             openFragment(currentFragment);
                             return true;
                         case R.id.navigation_challenges:
