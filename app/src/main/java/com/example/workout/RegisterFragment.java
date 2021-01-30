@@ -7,6 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +23,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class RegisterFragment extends Fragment {
+
+    private EditText inputEmail, inputPassword;
+    private String email, password;
+    private Button btnSignUp;
+    private FirebaseAuth auth;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +73,33 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_register, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        auth=FirebaseAuth.getInstance();
+        btnSignUp=(Button) view.findViewById(R.id.button5);
+        inputEmail=(EditText) view.findViewById(R.id.registeremail) ;
+        inputPassword=(EditText) view.findViewById(R.id.registerpassword) ;
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database=FirebaseDatabase.getInstance();
+                DatabaseReference reference=database.getReference("users");
+                email=inputEmail.getText().toString();
+                password=inputPassword.getText().toString();
+                System.out.println(email);
+                System.out.println(password);
+                if(!email.isEmpty() && password.length()>6&&password.length()<100){
+                    UserHelper userHelper=new UserHelper(email,password);
+                    reference.child(email).setValue(userHelper);
+                }
+                else{
+
+                    Toast toast=Toast.makeText(getContext(),"Wrong email or password! Try again. ",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+        return view;
     }
 }
