@@ -3,6 +3,9 @@ package com.example.workout;
 public class UserHelper {
     private String email, password;
 
+    public  UserHelper(){
+        
+    }
     public UserHelper(String email, String password) {
         this.email = email;
         this.password = password;

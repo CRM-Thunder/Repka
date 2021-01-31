@@ -9,7 +9,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="68dp"
         android:text="@string/register"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/registeremail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="220dp"
         android:ems="10"
         android:hint="e-mail"
         android:inputType="textEmailAddress"
@@ -30,10 +30,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/registerusername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="304dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/registerpassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
         android:id="@+id/registerpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="388dp"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"

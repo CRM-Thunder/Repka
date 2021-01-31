@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import static com.example.workout.LoginFragment.setIsLoggedIn;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LoggedFragment#newInstance} factory method to
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
  */
 public class LoggedFragment extends Fragment {
 
+    private Button logout_btn;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,7 +60,26 @@ public class LoggedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_logged, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logged, container, false);
+        logout_btn=(Button) view.findViewById(R.id.logout_btn);
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginFragment loginFragment= new LoginFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, loginFragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+                setIsLoggedIn(false);
+            }
+        });
+
+
+
+
+
+
+        return view;
     }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +23,7 @@ public class LoginFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private Button logIn;
     public static boolean isLoggedIn=false;
+    private TextView registertextview;
 
     public static boolean isIsLoggedIn() {
         return isLoggedIn;
@@ -72,6 +74,17 @@ public class LoginFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_login, container, false);
         // Inflate the layout for this fragment
         logIn = view.findViewById(R.id.login_b);
+        registertextview=(TextView) view.findViewById(R.id.registertextview);
+        registertextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterFragment registerFragment= new RegisterFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, registerFragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

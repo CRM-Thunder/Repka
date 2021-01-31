@@ -14,6 +14,8 @@
     <string name="start">START</string>
     <string name="pause">PAUSE</string>
     <string name="reset">RESET</string>
+    <string name="logged_in">You are logged in.</string>
+    <string name="logout">Log out</string>
     <string-array name="language">
         <item>English</item>
         <item>Polish</item>

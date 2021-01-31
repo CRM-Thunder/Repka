@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment challenges = new ChallengesFragment();
     Fragment settings = new SettingsFragment();
     Fragment loggedIn = new LoggedFragment();
+    Fragment login=new LoginFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                home).commit();
+                login).commit();
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case R.id.navigation_home:
                             if(!isIsLoggedIn()) {
-                                currentFragment = home;
+                                currentFragment =login ;
                             }else{
                             currentFragment = loggedIn;
                             }
