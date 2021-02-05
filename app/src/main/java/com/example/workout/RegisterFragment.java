@@ -143,10 +143,11 @@ public class RegisterFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                   UserHelper user=new UserHelper(email,username);
-
+                    System.out.println("Wszedł do pierwszego is succesful" );
                   FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                       @Override
                       public void onComplete(@NonNull Task<Void> task) {
+                          System.out.println("Wszedł do drugiego is succesful" );
                         if(task.isSuccessful()){
                            Toast.makeText(getContext(),"User has been registered successfully.",Toast.LENGTH_SHORT).show();
 
