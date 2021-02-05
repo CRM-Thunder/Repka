@@ -1,14 +1,16 @@
 package com.example.workout;
 
 public class UserHelper {
-    private String email, password;
+    public String email, username;
 
-    public  UserHelper(){
+    public UserHelper(){
         
     }
-    public UserHelper(String email, String password) {
+
+    public UserHelper(String email, String username) {
+        this.username=username;
         this.email = email;
-        this.password = password;
+
     }
 
     public String getEmail() {
@@ -19,11 +21,11 @@ public class UserHelper {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

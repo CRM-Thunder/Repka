@@ -2,13 +2,16 @@ package com.example.workout;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,10 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class RegisterFragment extends Fragment {
 
-    private EditText inputEmail, inputPassword;
-    private String email, password;
+    private EditText inputEmail, inputPassword, inputUsername;
+    //private String username, email, password;
     private Button btnSignUp;
-    private FirebaseAuth auth;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -76,30 +80,89 @@ public class RegisterFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_register, container, false);
 
         // Inflate the layout for this fragment
-        auth=FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
+        progressBar=(ProgressBar) view.findViewById(R.id.register_progressbar);
         btnSignUp=(Button) view.findViewById(R.id.button5);
         inputEmail=(EditText) view.findViewById(R.id.registeremail) ;
         inputPassword=(EditText) view.findViewById(R.id.registerpassword) ;
+        inputUsername=(EditText) view.findViewById(R.id.registerusername);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase database=FirebaseDatabase.getInstance();
-                DatabaseReference reference=database.getReference("users");
-                email=inputEmail.getText().toString();
-                password=inputPassword.getText().toString();
-                System.out.println(email);
-                System.out.println(password);
-                if(!email.isEmpty() && password.length()>6&&password.length()<100){
-                    UserHelper userHelper=new UserHelper(email,password);
-                    reference.child(email).setValue(userHelper);
+                registerUser();
+
+               /* if(!email.isEmpty() && password.length()>6&&password.length()<100){
+
                 }
                 else{
 
                     Toast toast=Toast.makeText(getContext(),"Wrong email or password! Try again. ",Toast.LENGTH_SHORT);
                     toast.show();
-                }
+                }*/
             }
         });
         return view;
+    }
+    private void registerUser(){
+        String username=inputUsername.getText().toString().trim();
+        String email=inputEmail.getText().toString().trim();
+        String password=inputPassword.getText().toString().trim();
+        if(email.isEmpty()){
+            inputEmail.setError("Email is required!");
+            inputEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            inputEmail.setError("You didn't provide correct email!");
+            inputEmail.requestFocus();
+            return;
+        }
+        if(username.isEmpty()){
+            inputUsername.setError("Username is required!");
+            inputUsername.requestFocus();
+            return;
+        }
+        if(password.isEmpty()){
+            inputPassword.setError("Password is required!");
+            inputPassword.requestFocus();
+            return;
+        }
+        if(password.length()<8){
+            inputPassword.setError("Your password length must be higher than 7");
+            inputPassword.requestFocus();
+            return;
+        }
+        if(password.length()>100){
+            inputPassword.setError("The password you provided is too long!");
+            inputPassword.requestFocus();
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                  UserHelper user=new UserHelper(email,username);
+
+                  FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                      @Override
+                      public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                           Toast.makeText(getContext(),"User has been registered successfully.",Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                        }
+                          progressBar.setVisibility(View.GONE);
+                      }
+                  });
+                }
+                else{
+                    Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+
+        });
     }
 }
