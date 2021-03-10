@@ -144,9 +144,11 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                  UserHelper user=new UserHelper(email,username);
+                  UserHelper user=new UserHelper(email,username, password);
                     System.out.println("Wszedł do pierwszego is succesful" );
-                  FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    /*FirebaseDatabase.getInstance().getReference("users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                       @Override
                       public void onComplete(@NonNull Task<Void> task) {
                           System.out.println("Wszedł do drugiego is succesful" );
@@ -158,7 +160,9 @@ public class RegisterFragment extends Fragment {
                         }
                           progressBar.setVisibility(View.GONE);
                       }
-                  });
+                  });*/
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getContext(),"User has been registered successfully.",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();

@@ -2,13 +2,23 @@ package com.example.workout;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +34,9 @@ public class LoginFragment extends Fragment {
     private Button logIn;
     public static boolean isLoggedIn=false;
     private TextView registertextview;
-
+    private EditText loginemail, loginpassword;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
     public static boolean isIsLoggedIn() {
         return isLoggedIn;
     }
@@ -74,7 +86,11 @@ public class LoginFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_login, container, false);
         // Inflate the layout for this fragment
         logIn = view.findViewById(R.id.login_b);
+        loginemail=(EditText)view.findViewById(R.id.loginemail);
+        loginpassword=(EditText)view.findViewById(R.id.loginpassword);
         registertextview=(TextView) view.findViewById(R.id.registertextview);
+        mAuth=FirebaseAuth.getInstance();
+        progressBar=(ProgressBar)view.findViewById(R.id.login_progressbar);
         registertextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,17 +104,74 @@ public class LoginFragment extends Fragment {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userLogin();
+                /*
                 LoggedFragment loggedFragment= new LoggedFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, loggedFragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
                         isLoggedIn=true;
+                        */
+
+            }
+        });
+        return view;
+    }
+    private void userLogin(){
+        String email=loginemail.getText().toString().trim();
+        String password=loginpassword.getText().toString().trim();
+        if(email.isEmpty()){
+            loginemail.setError("Email is required!");
+            loginemail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            loginemail.setError("You didn't provide correct email!");
+            loginemail.requestFocus();
+            return;
+        }
+        if(password.isEmpty()){
+            loginpassword.setError("Password is required!");
+            loginpassword.requestFocus();
+            return;
+        }
+        if(password.length()<8){
+            loginpassword.setError("Your password length must be higher than 7");
+            loginpassword.requestFocus();
+            return;
+        }
+        if(password.length()>100){
+            loginpassword.setError("The password you provided is too long!");
+            loginpassword.requestFocus();
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    LoggedFragment loggedFragment= new LoggedFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, loggedFragment, "findThisFragment")
+                            .addToBackStack(null)
+                            .commit();
+                    isLoggedIn=true;
+
+
+
+                }else{
+                    Toast.makeText(getContext(),"Failed to login! Please check your credentials.",Toast.LENGTH_SHORT).show();
+
+
+
+                }
+                progressBar.setVisibility(View.GONE);
             }
         });
 
 
 
-        return view;
+
     }
 }

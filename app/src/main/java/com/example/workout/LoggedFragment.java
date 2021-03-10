@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import static com.example.workout.LoginFragment.setIsLoggedIn;
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +21,8 @@ import static com.example.workout.LoginFragment.setIsLoggedIn;
 public class LoggedFragment extends Fragment {
 
     private Button logout_btn;
+    private FirebaseAuth mAuth;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,6 +69,8 @@ public class LoggedFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_logged, container, false);
         // Inflate the layout for this fragment
         logout_btn=(Button) view.findViewById(R.id.logout_btn);
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +80,10 @@ public class LoggedFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
                 setIsLoggedIn(false);
+                System.out.println(user);
+                mAuth.signOut();
+               FirebaseUser yuser=FirebaseAuth.getInstance().getCurrentUser();
+                System.out.println(yuser);
             }
         });
 
