@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import static com.example.workout.LoginFragment.isIsLoggedIn;
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +26,7 @@ public class ChallengesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView login_text;
 
     public ChallengesFragment() {
         // Required empty public constructor
@@ -60,6 +64,10 @@ public class ChallengesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view=inflater.inflate(R.layout.fragment_challenges, container, false);
+       login_text=view.findViewById(R.id.log_text);
+       if(isIsLoggedIn()) {
+           login_text.setText("Logged");
+       }
        return view;
     }
 }

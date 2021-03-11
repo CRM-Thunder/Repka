@@ -7,4 +7,20 @@
     <string name="challenges">Challenges</string>
     <string name="settings">Settings</string>
     <string name="activity">Activity</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="login_or_register">Login or register</string>
+    <string name="not_logged">You are not logged in.</string>
+    <string name="start">START</string>
+    <string name="pause">PAUSE</string>
+    <string name="reset">RESET</string>
+    <string name="logged_in">You are logged in.</string>
+    <string name="logout">Log out</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
+    <string-array name="language">
+        <item>English</item>
+        <item>Polish</item>
+    </string-array>
+
 </resources>

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
@@ -18,14 +20,25 @@ import com.google.android.gms.maps.MapView;
  * create an instance of this fragment.
  */
 public class ActivitiesFragment extends Fragment {
-    private static boolean runStarted=false;
+    private static boolean runStarted;
+    private static boolean activeRun;
 
+    public static boolean isActiveRun() {
+        return activeRun;
+    }
 
+    public static void setRunStarted(boolean runStarted) {
+        ActivitiesFragment.runStarted = runStarted;
+    }
 
+    public static boolean isRunStarted() {
+        return runStarted;
+    }
 
-    Button startButton;
-    TextView timeTxtView, startNewRunTxtView, velocityTxtView, distanceTxtView, kcalTxtView;
-    MapView map;
+    private Chronometer chronometer;
+    private Button startButton, pauseButton, resetButton;
+    private long pauseOffset;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -56,30 +69,69 @@ public class ActivitiesFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
 
 
+
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activities, container, false);
+        chronometer = (Chronometer)view.findViewById(R.id.chronometer);
 
-            startButton = view.findViewById(R.id.buttonStart);
-            timeTxtView=view.findViewById(R.id.timeTxtViewSt);
-            startNewRunTxtView=view.findViewById(R.id.startNewRunTxtViewSt);
-            velocityTxtView=view.findViewById(R.id.velocityTxtViewSt);
-            distanceTxtView=view.findViewById(R.id.distanceTxtViewSt);
-            kcalTxtView=view.findViewById(R.id.kcalTxtViewSt);
-            startButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        startButton = view.findViewById(R.id.startButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!runStarted) {
 
 
+                    chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                    chronometer.start();
+                    runStarted = true;
+                    activeRun=true;
                 }
-            });
+
+            }
+        });
+
+        pauseButton = view.findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(runStarted){
+
+                    chronometer.stop();
+                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    runStarted = false;
+                    activeRun=true;
+                }
+
+            }
+        });
+
+        resetButton = view.findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chronometer.stop();
+                runStarted = false;
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                pauseOffset = 0;
+                activeRun=false;
+            }
+        });
+        chronometer.setBase(SystemClock.elapsedRealtime());
+            System.out.println(pauseOffset);
             return view;
     }
+
 }

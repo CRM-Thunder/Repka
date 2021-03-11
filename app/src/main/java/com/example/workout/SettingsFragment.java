@@ -2,12 +2,14 @@ package com.example.workout;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Switch;
 
 /**
@@ -19,6 +21,10 @@ public class SettingsFragment extends Fragment {
     Switch switch2;
     int c=0;
     boolean dark_mode=false;
+
+
+
+    Spinner spinner;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -88,10 +94,14 @@ public class SettingsFragment extends Fragment {
             }
         });
     */
-        System.out.println("Po h"+c);
+
+
+
+
 
 
         return view;
     }
+
 
 }

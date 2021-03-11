@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,7 +15,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-int g=0;
+    int g=0;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -23,6 +24,8 @@ int g=0;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Button login, register;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -59,10 +62,36 @@ int g=0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        System.out.println("Przed h"+g);
-        g+=10;
-        System.out.println("Po h"+g);
+
+
+
         View view=inflater.inflate(R.layout.fragment_home, container, false);
+
+        login = view.findViewById(R.id.login_btn);
+        register = view.findViewById(R.id.register_btn);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginFragment loginFragment= new LoginFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, loginFragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterFragment registerFragment= new RegisterFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, registerFragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
+
+
         return view;
     }
 }
